@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajvir - Personal Bio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-dark: #1a1a2e;
+            --secondary-dark: #16213e;
+            --accent-blue: #0f3460;
+            --text-light: #e0e0e0;
+            --gradient-start: #0f3460;
+            --gradient-end: #1a1a2e;
+            --rcb-red: #c60000;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* New font for body */
+            margin: 0;
+            padding: 0;
+            color: var(--text-light);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border-bottom: 2px solid var(--accent-blue);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-pic-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            padding: 5px;
+            background: linear-gradient(45deg, var(--accent-blue), var(--rcb-red));
+            animation: pulse-border 2s infinite alternate;
+        }
+
+        @keyframes pulse-border {
+            0% {
+                box-shadow: 0 0 0 0 rgba(15, 52, 96, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 0 10px rgba(15, 52, 96, 0);
+            }
+        }
+
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-dark); /* Inner border */
+        }
+
+        .header-info h1 {
+            font-size: 3em;
+            margin: 10px 0;
+            font-family: 'Outfit', sans-serif; /* New font for name */
+            font-weight: 700;
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            white-space: nowrap; /* Keeps the content on a single line */
+            border-right: .15em solid var(--rcb-red); /* The typewriter cursor */
+            animation:
+                typing 3.5s steps(7, end),
+                blink-caret .75s step-end infinite;
+            display: inline-block; /* Required for the cursor effect */
+        }
+
+        /* Typing effect */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* The typewriter cursor effect */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--rcb-red); }
+        }
+
+        .header-info p {
+            font-size: 1.2em;
+            margin: 5px 0;
+            font-weight: 500;
+        }
+
+        .header-info p span {
+            font-weight: 600;
+            color: var(--rcb-red); /* Highlight RCB */
+        }
+
+        /* --- Main Content --- */
+        main {
+            flex-grow: 1;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        section {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--accent-blue);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: var(--text-light);
+            position: relative;
+            font-family: 'Outfit', sans-serif; /* New font for headings */
+            font-weight: 600;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--rcb-red);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- About Me --- */
+        #about-me p {
+            font-size: 1.1em;
+            line-height: 1.7;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Skills --- */
+        #skills .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-badge {
+            background-color: var(--accent-blue);
+            color: var(--text-light);
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-badge:hover {
+            background-color: var(--rcb-red);
+            transform: translateY(-5px);
+        }
+
+        /* --- My Idols --- */
+        #my-idols .idol-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .idol-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px; /* More rounded */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+            width: 220px; /* Slightly smaller width */
+            height: 300px; /* Slightly smaller height */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        .idol-item img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover; /* Ensures images cover the area without distortion */
+            transition: transform 0.5s ease-in-out;
+            border-radius: 25px; /* Apply border-radius to the image itself */
+        }
+
+        .idol-item:hover img {
+            transform: scale(1.05); /* Slightly less aggressive zoom on hover */
+        }
+
+        .idol-item h3 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--text-light);
+            padding: 10px 0;
+            margin: 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-bottom-left-radius: 25px; /* Match item border-radius */
+            border-bottom-right-radius: 25px; /* Match item border-radius */
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
+            border-top: 2px solid var(--accent-blue);
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+
+        .social-icons a {
+            color: var(--text-light);
+            font-size: 2em;
+            margin: 0 15px;
+            transition: color 0.3s ease, transform 0.2s ease;
+        }
+
+        .social-icons a:hover {
+            color: var(--rcb-red);
+            transform: scale(1.1);
+        }
+
+        /* --- Modal (Lightbox) Styles --- */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top of everything */
+            padding-top: 50px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+            backdrop-filter: blur(10px); /* Cool blur effect */
+            animation: fadeIn 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 10px; /* Slightly rounded corners for the big image */
+            box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+            animation-name: zoom;
+            animation-duration: 0.6s;
+            object-fit: contain; /* Ensure the whole image is visible */
+        }
+
+        @keyframes zoom {
+            from {transform: scale(0.1)}
+            to {transform: scale(1)}
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+            z-index: 101; /* Ensure it's above the modal content */
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .header-info h1 {
+                font-size: 2.2em;
+            }
+
+            .profile-pic {
+                width: 120px;
+                height: 120px;
+            }
+
+            main {
+                padding: 30px 15px;
+                gap: 40px;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .idol-item {
+                width: 180px; /* Adjust for smaller screens */
+                height: 250px; /* Adjust for smaller screens */
+            }
+
+            .skill-badge {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+
+            .social-icons a {
+                font-size: 1.8em;
+                margin: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 10px;
+            }
+
+            .header-info h1 {
+                font-size: 1.8em;
+                border-right: none; /* Hide cursor on very small screens if it looks off */
+                animation: none; /* Disable typing animation on very small screens */
+                white-space: normal; /* Allow name to wrap */
+            }
+
+            .profile-pic {
+                width: 100px;
+                height: 100px;
+            }
+
+            main {
+                padding: 20px 10px;
+                gap: 30px;
+            }
+
+            section {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.6em;
+            }
+
+            .idol-gallery {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+
+            .idol-item {
+                width: 80%; /* Adjust width for smaller screens */
+                max-width: 250px; /* Prevent it from getting too wide */
+                height: 320px;
+            }
+
+            .skill-badge {
+                font-size: 0.8em;
+                padding: 8px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="profile-pic-container">
+            <img src="https://i.ibb.co/Pv76Jk3b/IMG-20250511-210638-583.webp" alt="Rajvir's Profile Picture" class="profile-pic">
+        </div>
+        <div class="header-info">
+            <h1>Rajvir</h1>
+            <p>Age: 15</p>
+            <p>Favorite Cricket Team: <span>RCB</span></p>
+        </div>
+    </header>
+
+    <main>
+        <section id="about-me">
+            <h2>About Me</h2>
+            <p>
+                Hello! I'm Rajvir, a 15-year-old passionate about coding and technology. I enjoy bringing ideas to life through code and have honed my skills in <strong>Python</strong>, <strong>PHP</strong>, <strong>HTML</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>. I also delve into <strong>app design</strong> and love exploring the world of <strong>editing</strong>. When I'm not immersed in lines of code, you'll find me cheering for my favorite cricket team, RCB!
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <span class="skill-badge">Python</span>
+                <span class="skill-badge">PHP</span>
+                <span class="skill-badge">HTML</span>
+                <span class="skill-badge">CSS</span>
+                <span class="skill-badge">JavaScript</span>
+                <span class="skill-badge">App Design</span>
+                <span class="skill-badge">Editing</span>
+            </div>
+        </section>
+
+        <section id="my-idols">
+            <h2>My Idols</h2>
+            <div class="idol-gallery">
+                <div class="idol-item">
+                    <img src="https://i.ibb.co/B5cxrV6D/images-1.jpg" alt="Virat Kohli - Iconic Shot">
+                    <h3>Virat Kohli</h3>
+                </div>
+                <div class="idol-item">
+                    <img src="https://i.ibb.co/MDTY2p3X/e94e512119a803be0015412fbcab0ff0.jpg" alt="Gojo Satoru - Powerful Pose">
+                    <h3>Gojo Satoru</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-icons">
+            <a href="https://instagram.com/rajvir_coder_ff" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/Therajop" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+        <p>&copy; 2025 Rajvir. All rights reserved.</p>
+    </footer>
+
+    <div id="imageModal" class="modal">
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="modalImg">
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Fade-in animation for sections
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Lightbox (Modal) functionality
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+            const closeBtn = document.querySelector(".close-button");
+            const idolImages = document.querySelectorAll(".idol-item img");
+
+            // Open modal on image click
+            idolImages.forEach(img => {
+                img.onclick = function() {
+                    modal.style.display = "block";
+                    modalImg.src = this.src; // Set the source of the modal image to the clicked image's source
+                }
+            });
+
+            // Close modal when 'X' is clicked
+            closeBtn.onclick = function() {
+                modal.style.display = "none";
+            }
+
+            // Close modal when clicking outside the image
+            modal.onclick = function(event) {
+                if (event.target === modal) { // If the click was on the modal background itself
+                    modal.style.display = "none";
+                }
+            }
+        });
+    </script>
+</body>
+  </html>
