@@ -471,52 +471,68 @@
     </div>
 
     <script>
-            document.addEventListener('DOMContentLoaded', () => {
-    // ---- PROFILE MODAL ----
+document.addEventListener('DOMContentLoaded', () => {
+    // ---- Fade-in animation for sections ----
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => observer.observe(section));
+
+    // ---- Profile Modal ----
     const profileModal = document.getElementById("modal");
     const profileModalImg = document.getElementById("modal-img");
-    const profilePic = document.querySelector(".profile-pic");
     const profileCloseBtn = document.getElementById("profile-close");
+    const profilePic = document.querySelector(".profile-pic");
 
-    profilePic.onclick = function () {
-        profileModal.style.display = "block";
-        profileModalImg.src = this.src;
-    }
+    if (profilePic && profileModal && profileModalImg && profileCloseBtn) {
+        profilePic.onclick = function () {
+            profileModal.style.display = "block";
+            profileModalImg.src = this.src;
+        }
 
-    profileCloseBtn.onclick = function () {
-        profileModal.style.display = "none";
-    }
-
-    profileModal.onclick = function(event) {
-        if (event.target === profileModal) {
+        profileCloseBtn.onclick = function () {
             profileModal.style.display = "none";
         }
+
+        profileModal.onclick = function (event) {
+            if (event.target === profileModal) {
+                profileModal.style.display = "none";
+            }
+        }
     }
 
-    // ---- IDOL MODAL ----
+    // ---- Idol Modal ----
     const idolModal = document.getElementById("imageModal");
     const idolModalImg = document.getElementById("modalImg");
-    const closeBtn = document.querySelector(".close-button:not(#profile-close)");
+    const idolCloseBtn = idolModal.querySelector(".close-button");
     const idolImages = document.querySelectorAll(".idol-item img");
 
-    idolImages.forEach(img => {
-        img.onclick = function () {
-            idolModal.style.display = "block";
-            idolModalImg.src = this.src;
-        }
-    });
+    if (idolModal && idolModalImg && idolCloseBtn && idolImages.length) {
+        idolImages.forEach(img => {
+            img.onclick = function () {
+                idolModal.style.display = "block";
+                idolModalImg.src = this.src;
+            }
+        });
 
-    closeBtn.onclick = function () {
-        idolModal.style.display = "none";
-    }
-
-    idolModal.onclick = function (event) {
-        if (event.target === idolModal) {
+        idolCloseBtn.onclick = function () {
             idolModal.style.display = "none";
+        }
+
+        idolModal.onclick = function (event) {
+            if (event.target === idolModal) {
+                idolModal.style.display = "none";
+            }
         }
     }
 });
-
 </script>
 </body>
   </html>
