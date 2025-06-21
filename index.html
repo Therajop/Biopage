@@ -492,6 +492,13 @@
             const modalImg = document.getElementById("modalImg");
             const closeBtn = document.querySelector(".close-button");
             const idolImages = document.querySelectorAll(".idol-item img");
+            const mypic = document.querySelector("profile-pic-container");
+            mypic.forEach(img => {
+                img.onclick = function() {
+                    modal.style.display = "block";
+                    modalImg.src = this.src; // Set the source of the modal image to the clicked image's source
+                }
+            });
 
             // Open modal on image click
             idolImages.forEach(img => {
