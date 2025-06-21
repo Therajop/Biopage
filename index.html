@@ -405,8 +405,14 @@
 <body>
     <header>
         <div class="profile-pic-container">
-            <img src="https://i.ibb.co/Pv76Jk3b/IMG-20250511-210638-583.webp" alt="Rajvir's Profile Picture" class="profile-pic">
-        </div>
+    <img src="https://i.ibb.co/Pv76Jk3b/IMG-20250511-210638-583.webp" alt="Rajvir's Profile Picture" class="profile-pic">
+</div>
+
+<!-- Modal structure (make sure this is in your HTML too) -->
+<div id="modal" style="display:none;">
+    <span onclick="document.getElementById('modal').style.display='none'">×</span>
+    <img id="modal-img" src="" alt="Modal Image">
+</div>
         <div class="header-info">
             <h1>Rajvir</h1>
             <p>Age: 15</p>
@@ -492,13 +498,14 @@
             const modalImg = document.getElementById("modalImg");
             const closeBtn = document.querySelector(".close-button");
             const idolImages = document.querySelectorAll(".idol-item img");
-            const mypic = document.querySelector("profile-pic-container");
-            mypic.forEach(img => {
-                img.onclick = function() {
-                    modal.style.display = "block";
-                    modalImg.src = this.src; // Set the source of the modal image to the clicked image's source
-                }
-            });
+            const profilePic = document.querySelector(".profile-pic");
+    const modal = document.getElementById("modal");
+    const modalImg = document.getElementById("modal-img");
+
+    profilePic.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+    }
 
             // Open modal on image click
             idolImages.forEach(img => {
